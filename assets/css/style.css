@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Madimi+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+header {
+    background-image: linear-gradient(to bottom, rgba(109, 106, 106, 0.5), rgba(109, 106, 106, 0.5)), url("../img/rows-red-seats-theater.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.presentation {
+    width: 70%;
+    color: #fff;
+}
+
+.presentation h1 {
+    font-size: 60px;
+    font-family: "Madimi One", sans-serif;
+    margin: 30px;
+}
+
+.presentation p {
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 60px;
+}
+
+.presentation a {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    background-color: #d51818;
+    color: #fff;
+    text-decoration: none;
+    transition: .3s ease-in;
+}
+
+.presentation a:hover {
+    letter-spacing: 1px;
+    background-color: #ff3232;
+    text-decoration: underline;
+
+}
+
+.card {
+    margin: 30px;
+    transition: .3s ease-in;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    border: 2px solid #d51818;
+}
+
+.card-body {
+    border: 1px solid #ccc;
+    padding: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-title {
+    margin: 20px;
+    font-family: "Red Hat Text", sans-serif;
+
+}
+
+.card-body img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.card-text {
+    margin: 30px;
+    text-align: center;
+
+}
+
+.container-movies {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.search {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 50px;
+}
+
+.search h1 {
+    font-size: 35px;
+    font-weight: 300;
+}
+
+.search ion-icon {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: -70px;
+}
+
+.avis {
+    width: 100%;
+    height: 130vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #2b2f55;
+}
+
+.avis h1,
+.avis p {
+    color: #fff;
+}
+
+.container-avis {
+    width: 70%;
+}
+
+.lst-movies {
+    width: 500px;
+    background-color: #fff;
+    border: 2px solid #424880;
+    margin: 50px;
+}
+
+.lst-movies p {
+    color: #000;
+    background-color: #f2f0f0;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.lst-movies .btn {
+    margin: 20px;
+}
+
+.barre {
+    width: 100%;
+    border-bottom: 2px solid #000;
+}
+
+.container-lst {
+    height: fit-content;
+}
+
+.two-container {
+    display: flex;
+}
+
+.pop-up{
+    margin: 10px;
+    width: 500px;
+    background: rgb(231, 253, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.pop-up p{
+    color: #1f293a;
+    font-size: 0.8em;
+}
+
+.pop-up ion-icon{
+    margin-right: 10px;
+}
+
+ol li {
+    margin-bottom: 35px;
+}
+
+@media screen and (max-width: 640px){
+
+    .presentation {
+        width: 90%;
+    }
+    .presentation h1 {
+        font-size: 40px;
+    }
+
+    .search {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .search h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .lst-movies {
+        width: 100%;
+        margin: 5px;
+    }
+
+    .container-lst {
+        height: fit-content;
+    }
+
+    .container-movies {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-avis h1 {
+        margin: 30px;
+    }
+
+    .avis a {
+        margin: 30px;
+    }
+
+    .search ion-icon {
+        margin-left: -40px;
+    }
+
+    .two-container {
+        display: flex;
+        flex-direction: column;
+    }
+    .avis {
+        height: 200vh;
+    }
+}

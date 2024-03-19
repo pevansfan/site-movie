@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Vue.js</title>
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Style CSS-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Draggable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.24.3/vuedraggable.umd.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js" defer></script>
+    <!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+    <script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js" defer></script>
+    <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js" defer></script>
+    <!-- Script JS-->
+    <script src="assets/js/script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <!-- Accueil -->
+        <div class="presentation">
+            <h1>Bienvenue sur notre site dédié au vote interactif pour des films</h1>
+            <p>Notre plateforme offre une expérience unique où vous pouvez voter pour vos films préférés de manière
+                interactive et engageante. Que vous soyez un cinéphile passionné ou simplement à la recherche de
+                nouvelles
+                recommandations, notre application vous permet de découvrir et de soutenir les films que vous aimez.</p>
+            <a href="#avis">Déterminer mes préférences</a>
+        </div>
+
+    </header>
+
+    <div id="app">
+        <div class="search">
+            <h1><ion-icon name="arrow-forward-outline"></ion-icon> Découvrez tous nos films dans différentes catégories
+                !</h1>
+            <!-- Sélecteur de catégories -->
+            <select class="form-select" v-model="selectedGenre" @change="searchMoviesByGenre" style="width: 300px;">
+                <option value="">Sélectionner une catégorie</option>
+                <option v-for="genre in genres" :key="genre.id" :value="genre.id">{{ genre.name }}</option>
+            </select>
+        </div>
+
+
+        <!-- Résultats de la recherche -->
+        <div id="searchResults" class="container-movies">
+            <div v-for="movie in movies" :key="movie.id" class="card">
+                <div class="card-body">
+                    <h2 class="card-title">{{ movie.title }}</h2>
+                    <img v-if="movie.poster_path" :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
+                    <p class="card-text">{{ movie.overview }}</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="avis" id="avis">
+            <div class="container-avis">
+                <h1>Votre avis nous intéresse !</h1>
+                <p>Ici, votre vote compte vraiment. Notre site vous offre la possibilité de voter pour vos films
+                    préférés en
+                    toute simplicité. Que vous soyez un cinéphile passionné ou juste quelqu'un qui aime regarder un bon
+                    film
+                    de temps en temps, votre opinion est précieuse pour nous.</p>
+            </div>
+            <!-- Un container regroupant 2 autres containers -->
+            <div class="two-container">
+                <!-- Récapitulatif des films (modifiable avec la méthode Drag and Drop)-->
+                <div class="lst-movies rounded" id="container1">
+                    <div class="container-lst">
+                        <p class="rounded-top">Top 10 des films les plus populaires</p>
+                        <span class="barre"></span>
+                        <draggable v-model="movies"> <!-- Permet de déplacer des éléments dans la liste selon les préférences de l'utilisateur-->
+                            <div v-for="movie in movies" :key="movie.id" style="cursor: pointer;" >{{movie.title}}
+                                <hr>
+                            </div>
+                        </draggable>
+                    </div>
+                </div>
+                <!-- Récapitulatif des films lorsque l'utilisateur aura soumis le vote-->
+                <div class="lst-movies rounded" id="container2">
+                    <div class="container-lst">
+                        <p class="rounded-top">Films selon vos préférences</p>
+                        <span class="barre"></span>
+                        <!-- Liste ordonnée pour les ranger de façon à ce que l'utilisateur voit précisément les films qu'il préfère le plus-->
+                        <ol id="sortable-list2" v-if="votingFinished" class="sortable-list">
+                            <li v-for="(result, index) in voteResults" :key="index"><b>{{ result.movie }}</b>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pop-up au click du bouton -->
+            <button onclick="showPopup()" @click="finishVote" class="btn btn-primary">Terminer le vote</button>
+            <div class="pop-up" id="popup" style="display: none;">
+                <p><ion-icon name="checkmark-outline"></ion-icon><i>Merci d'avoir voter ! Nous mettrons à jour les films
+                        selon vos préférences</i></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <!-- Boostrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <!-- Icônes (juste pour la flèche à côté du paragraphe de classe .search)-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+
+</html>
